@@ -3,5 +3,4 @@ log/*.log
 tmp/**
 *.swp
 *~
-/public/*
 /.bundle/
