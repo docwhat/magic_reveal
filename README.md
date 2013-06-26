@@ -18,9 +18,11 @@ work".  Ideally, without having to run rack or grunt.
 ## Usage
 
 1. Clone this repository.
-2. Edit slides.md to your heart content. Headers (e.g. `## foo`) mark the
+2. `bundle install`
+3. Edit slides.md to your heart content. Headers (e.g. `## foo`) mark the
    beginning of slides.
-3. Run rackup or [pow](http://pow.cx) to get the site up.
+4. Run `rackup` or [pow](http://pow.cx) to get the site up.
+5. Visit the site!
 
 That's it!
 
