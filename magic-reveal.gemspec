@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'magic/reveal/version'
+require 'magic_reveal/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "magic-reveal"
-  spec.version       = Magic::Reveal::VERSION
+  spec.name          = "magic_reveal"
+  spec.version       = MagicReveal::VERSION
   spec.authors       = ["Christian Höltje"]
   spec.email         = ["docwhat@gerf.org"]
   spec.description   = %q{Create presentations with markdown and ease!}
   spec.summary       = %q{Create presentations using markdown and reveal.js}
-  spec.homepage      = "https://github.com/docwhat/magic-reveal"
+  spec.homepage      = "https://github.com/docwhat/magic_reveal"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)

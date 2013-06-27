@@ -1,2 +1,2 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
-require 'magic/reveal'
+require 'magic_reveal'

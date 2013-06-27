@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe Magic::Reveal do
+describe MagicReveal do
   it 'should have a version number' do
-    Magic::Reveal::VERSION.should_not be_nil
+    MagicReveal::VERSION.should_not be_nil
   end
 
   it 'should do something useful' do
