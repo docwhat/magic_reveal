@@ -24,6 +24,15 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler",     "~> 1.3"
   spec.add_development_dependency "rake"
-  spec.add_development_dependency "rspec",       "~> 2.13"
+  spec.add_development_dependency "guard-rspec", "~> 3.0"
   spec.add_development_dependency "coveralls",   "~> 0.6"
+
+  #For detecting changes in the filesystem
+  spec.add_development_dependency 'rb-inotify'
+  spec.add_development_dependency 'rb-fsevent'
+  spec.add_development_dependency 'rb-fchange'
+
+  #For displaying notices
+  spec.add_development_dependency 'terminal-notifier-guard'
+  spec.add_development_dependency 'libnotify'
 end
