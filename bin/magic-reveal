@@ -1,3 +1,7 @@
 #!/usr/bin/env ruby
 
-require 'magic/reveal'
+$:.unshift File.expand_path('../../lib', __FILE__)
+
+require 'magic_reveal/cli'
+
+MagicReveal::CLI.run
