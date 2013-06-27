@@ -1,6 +1,7 @@
-# MagicReveal
+# magic_reveal
 
-TODO: Write a gem description
+Magic Reveal makes creating presentations easy and fun.
+
 
 ## Installation
 
