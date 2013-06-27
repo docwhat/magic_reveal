@@ -1,0 +1,51 @@
+#!/usr/bin/env ruby
+
+require 'net/https'
+require 'archive/zip'
+require 'pathname'
+require 'fileutils'
+
+raise "You need the HOME environment variable set." unless ENV.key? 'HOME'
+
+CACHE_DIR = Pathname.new(ENV['HOME']) + '.rack-reveal'
+REVEAL_URL = 'https://github.com/hakimel/reveal.js/archive/master.zip'
+
+def fetch uri, dest, limit = 5
+  raise ArgumentError, 'too many HTTP redirects' if limit == 0
+
+  url = URI.parse uri
+
+  request = Net::HTTP::Get.new url.path
+  response = Net::HTTP.start(
+    url.host,
+    url.port,
+    use_ssl: url.scheme == 'https',
+  ) { |http| http.request(request) }
+
+  case response
+  when Net::HTTPSuccess then
+    File.write(dest, response.body)
+  when Net::HTTPRedirection then
+    new_uri = response['location']
+    warn "redirected to #{new_uri}"
+    fetch(new_uri, dest, limit - 1)
+  else
+    response.value
+  end
+end
+
+if $0 == __FILE__
+  CACHE_DIR.mkpath
+  zip_file    = CACHE_DIR + 'master.zip'
+  extract_dir = CACHE_DIR + 'reveal.js'
+
+  fetch REVEAL_URL, zip_file unless zip_file.exist?
+
+  Archive::Zip.extract zip_file.to_s, extract_dir.to_s unless extract_dir.exist?
+
+  if !(extract_dir + 'css').exist?
+    bad_dir = extract_dir.children.first
+    bad_dir.children.each { |c| c.rename(extract_dir + c.basename) }
+    bad_dir.unlink
+  end
+end
