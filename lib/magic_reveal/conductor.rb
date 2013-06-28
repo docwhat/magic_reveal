@@ -19,13 +19,14 @@ module MagicReveal
 
     def fetch save_path, limit = 5
       raise TooManyRedirects if limit <= 0
+      save_path = Pathname.new save_path
 
       request = Net::HTTP::Get.new url.path
       response = Net::HTTP.start(url.host, url.port, use_ssl: url.scheme == 'https') { |http| http.request(request)  }
 
       case response
       when Net::HTTPSuccess then
-        File.write(save_path, response.body)
+        save_path.open('w') { |fp| fp.write response.body }
       when Net::HTTPRedirection then
         self.url = response['location']
         warn "redirected to #{url}" if enable_warnings
