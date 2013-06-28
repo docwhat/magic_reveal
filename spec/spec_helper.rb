@@ -1,4 +1,7 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+require 'pathname'
+
+EXAMPLE_DATA = Pathname.new(__FILE__).dirname + 'data'
 
 if ENV['TRAVIS'] == 'true'
   require 'coveralls'
