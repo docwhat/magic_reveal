@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'magic_reveal/conductor'
 
 describe MagicReveal::Conductor do
-  subject { described_class.new }
+  subject { described_class.new 'http://localhost/conductor_test/' }
 
   around do |example|
     Dir.mktmpdir('conductor') do |tmpdir|
@@ -11,15 +11,7 @@ describe MagicReveal::Conductor do
     end
   end
 
-  describe "#new" do
-    it { should be_kind_of(described_class) }
-  end
-
-  describe ".url" do
-    subject { described_class.new 'http://example.com/' }
-
-    its(:url) { should be_kind_of(URI) }
-  end
+  its(:url) { should be_kind_of(URI) }
 
   describe ".fetch" do
     it "should save a file" do
