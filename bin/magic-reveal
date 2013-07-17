@@ -4,4 +4,4 @@ $:.unshift File.expand_path('../../lib', __FILE__)
 
 require 'magic_reveal/cli'
 
-MagicReveal::CLI.run
+MagicReveal::Cli.run
