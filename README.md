@@ -19,11 +19,11 @@ Use `gem` to install magic_reveal:
 * Ruby 1.9.2 or newer
 * A Posix compliant system (Linux, OS X; not Windows)
 
-## Development
-
 ## Usage
 
 TODO: Write usage instructions here
+
+## Development
 
 ## Contributing
 
