@@ -23,6 +23,8 @@ module MagicReveal
       top_dir.mkdir
 
       reveal_js_fetcher.save_to(reveal_dir)
+      # create starting markdown file
+      # create config.ru
     end
   end
 end

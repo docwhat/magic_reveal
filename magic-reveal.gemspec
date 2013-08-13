@@ -23,6 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency             "sinatra",     "~> 1.4"
   spec.add_dependency             "redcarpet",   "~> 3.0"
   spec.add_dependency             "archive-zip", "~> 0.6"
+  spec.add_dependency             "sys-admin",   "~> 1.6"
 
   spec.add_development_dependency "bundler",     "~> 1.3"
   spec.add_development_dependency "rake"
