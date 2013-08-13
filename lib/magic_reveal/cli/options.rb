@@ -5,6 +5,11 @@ module MagicReveal
         :command,
         :project,
       )
+
+      def program_name
+        @program_name ||= File.basename($0)
+      end
+
       def parse args
         case args.first
         when 'new'

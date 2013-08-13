@@ -1,3 +1,4 @@
 module MagicReveal
-  VERSION = "0.0.1"
+  REVEAL_JS_VERSION = "2.4.0"
+  VERSION = "#{REVEAL_JS_VERSION}.1"
 end

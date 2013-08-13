@@ -1,4 +1,4 @@
-guard :rspec, :cli => "--color --order default --format doc" do
+guard :rspec, :cli => "--color --order default --format progress" do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/#{m[1]}_spec.rb" }
   watch('spec/spec_helper.rb')  { "spec" }
