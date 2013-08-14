@@ -14,10 +14,18 @@ Use `gem` to install magic_reveal:
 
     $ gem install magic_reveal
 
+The version numbers are the based on the versions of
+[reveal.js](https://github.com/hakimel/reveal.js). The last number is
+the revision specific to Magic Reveal.
+
 ### Requirements
 
 * Ruby 1.9.2 or newer
-* A Posix compliant system (Linux, OS X; not Windows)
+* A recent version of [Bundler](http://bundler.io/)
+
+<br/>
+Magic Reveal *may* work on non-posix systems, but I make no promises. Pull Requests are
+welcome.
 
 ## Usage
 
