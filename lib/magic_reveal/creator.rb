@@ -37,7 +37,7 @@ module MagicReveal
       gemfile.open('w') do |f|
         f.puts "source 'https://rubygems.org'"
         f.puts
-        f.puts "gem 'magic-reveal', '~> #{VERSION}'"
+        f.puts "gem 'magic_reveal', '~> #{VERSION}'"
       end
 
       Dir.chdir(top_dir.to_s) do
