@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'magic_reveal/slide_renderer'
+require 'tmpdir'
 
 describe MagicReveal::SlideRenderer do
   describe ".header" do
@@ -22,6 +23,18 @@ describe MagicReveal::SlideRenderer do
       txt = "text#{rand 99}"
       lvl = rand(6)
       expect(subject.header(txt, lvl)).to match(%r{<h#{lvl}>#{txt}</h#{lvl}>\Z})
+    end
+  end
+
+  describe ".doc_header" do
+    it "should generate an HTML comment" do
+      expect(subject.doc_header).to match %r{\A<!--\s.*\s-->\Z}
+    end
+
+    it "should set has_shown_slides to false" do
+      subject.has_shown_slides = true
+      subject.doc_header
+      expect(subject.has_shown_slides).to be_false
     end
   end
 

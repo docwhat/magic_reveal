@@ -1,6 +1,7 @@
 require 'fileutils'
 require 'pathname'
 
+require 'magic_reveal/version'
 require 'magic_reveal/reveal_js_fetcher'
 
 module MagicReveal

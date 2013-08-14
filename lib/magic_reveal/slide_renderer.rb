@@ -1,6 +1,8 @@
 require 'redcarpet'
 require 'cgi'
 
+require 'magic_reveal/version'
+
 module MagicReveal
   class SlideRenderer < Redcarpet::Render::HTML
     include Redcarpet::Render::SmartyPants
