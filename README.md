@@ -39,7 +39,7 @@ Feel free to replace [vim](http://vim.org/) with the editor of your choice.
 
 ### Viewing the presentation
 
-    $ rackup
+    $ magic-reveal start
 
 Then open your browser to [`http://localhost:9292`](http://localhost:9292).
 

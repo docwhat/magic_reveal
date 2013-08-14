@@ -19,6 +19,18 @@ module MagicReveal
     end
 
     # Action Classes
+    def show_help
+      puts "Usage: #{program_name} <command>"
+      puts
+      puts "  new <name>"
+      puts "    Creates new presentation in directory <name>"
+      puts
+      puts "  start [options]"
+      puts "    Starts serving the presentation in the current directory"
+      puts
+      exit
+    end
+
     def creator
       @creator ||= Creator.new(Dir.getwd)
     end
@@ -28,12 +40,6 @@ module MagicReveal
       ARGV.shift
       Rack::Server.start
       exit
-    end
-
-    def show_help
-      puts "Usage: #{program_name}"
-      puts
-      puts "This isn't written yet."
     end
 
     def avenge_programmer
