@@ -33,6 +33,7 @@ module MagicReveal
       top_dir.mkdir
 
       reveal_js_fetcher.save_to(reveal_dir)
+
       FileUtils.copy_file template_slides.to_s, (top_dir + 'slides.md').to_s
       FileUtils.copy_file template_config_ru.to_s, (top_dir + 'config.ru').to_s
       gemfile.open('w') do |f|

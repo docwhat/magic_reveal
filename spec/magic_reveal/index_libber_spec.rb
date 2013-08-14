@@ -30,7 +30,7 @@ describe MagicReveal::IndexLibber do
 
     it "does stuff" do
       subject.update_slides slides
-      puts subject
+      expect(subject.to_s).to include('life with Joe')
     end
   end
 

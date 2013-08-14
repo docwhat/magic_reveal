@@ -23,6 +23,25 @@ module MagicReveal
       @creator ||= Creator.new(Dir.getwd)
     end
 
+    def start_server
+      require 'rack'
+      ARGV.shift
+      Rack::Server.start
+      exit
+    end
+
+    def show_help
+      puts "Usage: #{program_name}"
+      puts
+      puts "This isn't written yet."
+    end
+
+    def avenge_programmer
+      puts "The programmer messed up."
+      puts "Please file a bug at https://github.com/docwhat/magic_reveal"
+      exit 13
+    end
+
     def options
       @options ||= Options.new
     end
@@ -33,10 +52,12 @@ module MagicReveal
       case command
       when :new
         creator.create_project(project)
+      when :start
+        start_server
+      when :help
+        show_help
       else
-        puts "Usage: #{program_name}"
-        puts
-        puts "This isn't written yet."
+        avenge_programmer
       end
     end
   end

@@ -19,9 +19,9 @@ module MagicReveal
             @command = :new
             @project = args[1]
           end
-        when 'help'
-          @command = :help
-        else
+        when 'start'
+          @command = :start
+        else # including help
           @command = :help
         end
       end

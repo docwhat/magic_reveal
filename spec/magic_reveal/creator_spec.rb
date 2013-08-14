@@ -3,8 +3,11 @@ require 'magic_reveal/creator'
 require 'pathname'
 
 describe MagicReveal::Creator do
-  before { subject.reveal_js_fetcher = fetcher }
   let(:fetcher) { double(MagicReveal::RevealJsFetcher).as_null_object }
+  before do
+    subject.stub(:system) # This is an integration test thingy.
+    subject.reveal_js_fetcher = fetcher
+  end
 
   context "with a temporary directory" do
     subject { described_class.new @tmpdir }

@@ -7,7 +7,11 @@ describe MagicReveal::Cli do
     context "with a null options" do
       let(:options) { double(MagicReveal::Cli::Options).as_null_object }
       let(:args) { double("ARGV") }
-      before { subject.stub(:options).and_return(options) }
+      before do
+        subject.stub(:show_help)
+        subject.stub(:avenge_programmer)
+        subject.stub(:options).and_return(options)
+      end
 
       context "command=nil" do
         before { subject.run args }
@@ -18,6 +22,10 @@ describe MagicReveal::Cli do
 
         it "fetches the command" do
           expect(options).to have_received(:command)
+        end
+
+        it "avenges the programmer" do
+          expect(subject).to have_received(:avenge_programmer)
         end
       end
 
@@ -39,11 +47,29 @@ describe MagicReveal::Cli do
             with(options.project)
         end
       end
+
+      context "command=help" do
+        it "shows help" do
+          subject.stub(:show_help)
+          subject.should_receive(:show_help).and_return(nil)
+          options.stub(:command).and_return(:help)
+          subject.run args
+        end
+      end
+
+      context "command=start" do
+        it "starts the server" do
+          subject.stub(:start_server)
+          subject.should_receive(:start_server).and_return(nil)
+          options.stub(:command).and_return(:start)
+          subject.run args
+        end
+      end
     end
   end
 
   describe ".creator" do
-    it "narf" do
+    it "sends new to creator" do
       MagicReveal::Creator.should_receive(:new).with(Dir.getwd)
       subject.creator
     end
