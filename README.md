@@ -21,13 +21,59 @@ Use `gem` to install magic_reveal:
 
 ## Usage
 
-TODO: Write usage instructions here
+To get started:
+
+    $ magic-reveal new my-presentation
+    $ cd my-presentation
+    $ vim slides.md
+
+Feel free to replace [vim](http://vim.org/) with the editor of your choice.
+
+### Viewing the presentation
+
+    $ rackup
+
+Then open your browser to [`http://localhost:9292`](http://localhost:9292).
+
+### The format of slides.md
+
+Magic Reveal uses [github-flavored
+markdown](https://help.github.com/articles/github-flavored-markdown)
+as much as practical.
+
+#### External code files
+
+If you want your source code to be in files outside your `slides.md`, no problem!
+
+To load source from `example.rb`, for example, then use `@@source = <filename>`
+as the body of the code section.
+
+For example:
+
+```
+`@@source = example.rb`
+```
+
+This works with triple back-quote blocks and four-space indented blocks sections as well.
 
 ## Development
 
+There is a full [RSpec](http://rspec.info/) test suite.  Make sure you
+write tests before you continue.
+
+For the places where I don't have tests because I couldn't figure it out,
+please help!
+
+### Future plans
+
+* Generate static sites via the `magic-reveal` command line tool
+* A configuration file, for using plugins, etc.
+
 ## Contributing
 
-1. Fork it
+(because you know it could be better)
+
+1. [Fork it](https://github.com/docwhat/magic_reveal)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
