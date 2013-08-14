@@ -36,19 +36,75 @@
 
       <!-- Any section element inside of this container is displayed as a slide -->
       <div class="slides">
-        <section>
-          <h2>Magic Reveal</h2>
-          <p>
-            A simple way to create presentations with the beauty and style of
-            <a href="http://lab.hakim.se/reveal-js/">Reveal.js</a>.
-          </p>
-        </section>
+        <section><h1>Magic Reveal</h1>
+          <p>Magic Reveal makes creating presentations easy and fun.</p>
 
-        <section>
-          <h1>COMING SOON!</h1>
-          <h3>BY Christian Höltje / docwhat.org</h3>
-        </section>
+          <p>See it in action at the <a href="http://docwhat.github.io/magic_reveal/">demo/tutorial</a></p>
 
+          <p><a href="http://travis-ci.org/docwhat/magic_reveal"><img src="https://secure.travis-ci.org/docwhat/magic_reveal.png?branch=master" alt="Build Status"></a>
+            <a href="https://gemnasium.com/docwhat/magic_reveal"><img src="https://gemnasium.com/docwhat/magic_reveal.png?branch=master" alt="Dependencies"></a>
+            <a href="https://coveralls.io/r/docwhat/magic_reveal"><img src="https://coveralls.io/repos/docwhat/magic_reveal/badge.png?branch=master" alt="Coverage Status"></a></p>
+          </section><section><h2>Installation</h2>
+          <p>Use <code>gem</code> to install magic_reveal:</p>
+<pre><code>$ gem install magic_reveal
+</code></pre>
+          <p>The version numbers are the based on the versions of
+            <a href="https://github.com/hakimel/reveal.js">reveal.js</a>. The last number is
+            the revision specific to Magic Reveal.</p>
+          </section><section><h3>Requirements</h3>
+          <ul>
+            <li>Ruby 1.9.2 or newer</li>
+            <li>A recent version of <a href="http://bundler.io/">Bundler</a>
+            </li>
+          </ul>
+          <p><br>
+            Magic Reveal <em>may</em> work on non-posix systems, but I make no promises. Pull Requests are
+            welcome.</p>
+          </section><section><h2>Usage</h2>
+          <p>To get started:</p>
+<pre><code>$ magic-reveal new my-presentation
+$ cd my-presentation
+$ vim slides.md
+</code></pre>
+          <p>Feel free to replace <a href="http://vim.org/">vim</a> with the editor of your choice.</p>
+          </section><section><h3>Viewing the presentation</h3>
+<pre><code>$ rackup
+</code></pre>
+          <p>Then open your browser to <a href="http://localhost:9292"><code>http://localhost:9292</code></a>.</p>
+          </section><section><h3>The format of slides.md</h3>
+          <p>Magic Reveal uses <a href="https://help.github.com/articles/github-flavored-markdown">github-flavored
+              markdown</a>
+            as much as practical.</p>
+          </section><section><h4>External code files</h4>
+          <p>If you want your source code to be in files outside your <code>slides.md</code>, no problem!</p>
+
+          <p>To load source from <code>example.rb</code>, for example, then use <code>@@source = &lt;filename&gt;</code>
+            as the body of the code section.</p>
+
+          <p>For example:</p>
+<pre><code>`@@source = example.rb`
+</code></pre>
+          <p>This works with triple back-quote blocks and four-space indented blocks sections as well.</p>
+          </section><section><h2>Development</h2>
+          <p>There is a full <a href="http://rspec.info/">RSpec</a> test suite.  Make sure you
+            write tests before you continue.</p>
+
+          <p>For the places where I don’t have tests because I couldn’t figure it out,
+            please help!</p>
+          </section><section><h3>Future plans</h3>
+          <ul>
+            <li>Generate static sites via the <code>magic-reveal</code> command line tool</li>
+            <li>A configuration file, for using plugins, etc.</li>
+          </ul></section><section><h2>Contributing</h2>
+          <p>(because you know it could be better)</p>
+
+          <ol>
+            <li><a href="https://github.com/docwhat/magic_reveal">Fork it</a></li>
+            <li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
+            <li>Commit your changes (<code>git commit -am 'Add some feature'</code>)</li>
+            <li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
+            <li>Create new Pull Request</li>
+        </ol></section>
       </div>
 
     </div>
@@ -61,26 +117,26 @@
       // Full list of configuration options available here:
     // https://github.com/hakimel/reveal.js#configuration
     Reveal.initialize({
-    controls: true,
-    progress: true,
-    history: true,
-    center: true,
+      controls: true,
+      progress: true,
+      history: true,
+      center: true,
 
-    theme: 'default',
-    transition: 'default',
+      theme: 'default',
+      transition: 'default',
 
-    // Optional libraries used to extend on reveal.js
-    dependencies: [
-      { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-      { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-      { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-      { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-      // { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-      // { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
-      // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
-    ]
-});
+      // Optional libraries used to extend on reveal.js
+      dependencies: [
+        { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+        { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+        { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+        { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+        { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+        // { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        // { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+        // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+      ]
+    });
 
     </script>
 
