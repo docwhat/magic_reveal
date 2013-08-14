@@ -42,6 +42,11 @@ module MagicReveal
         f.puts "gem 'magic_reveal', '~> #{VERSION}'"
       end
 
+      reveal_dir.children.each do |subdir|
+        next unless subdir.directory?
+        (top_dir + subdir.basename).make_symlink(subdir)
+      end
+
       Dir.chdir(top_dir.to_s) do
         system 'bundle install'
       end

@@ -17,7 +17,10 @@ describe MagicReveal::Creator do
 
     describe "create_project" do
       let(:project) { "project#{rand 99}" }
-      before { FileUtils.stub(:copy_file)  }
+      before do
+        FileUtils.stub(:copy_file)
+        Pathname.any_instance.stub(:children).and_return([])
+      end
 
       it "makes the project directory" do
         subject.create_project(project)

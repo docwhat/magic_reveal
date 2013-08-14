@@ -19,7 +19,7 @@ module MagicReveal
       end
     end
 
-    set :public_folder, File.expand_path('reveal.js', Dir.getwd)
+    set :public_folder, Dir.getwd
 
     helpers do
       def markdown
