@@ -43,6 +43,12 @@ Feel free to replace [vim](http://vim.org/) with the editor of your choice.
 
 Then open your browser to [`http://localhost:9292`](http://localhost:9292).
 
+### Write a static index.html
+
+    $ magic-reveal static
+
+This generates a static `index.html` suitable for committing to git.
+
 ### The format of slides.md
 
 Magic Reveal uses [github-flavored

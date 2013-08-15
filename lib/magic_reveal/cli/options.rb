@@ -21,6 +21,8 @@ module MagicReveal
           end
         when 'start'
           @command = :start
+        when 'static'
+          @command = :static
         else # including help
           @command = :help
         end

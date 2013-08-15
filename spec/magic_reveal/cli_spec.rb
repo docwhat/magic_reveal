@@ -65,6 +65,15 @@ describe MagicReveal::Cli do
           subject.run args
         end
       end
+
+      context "command=static" do
+        it "creates a static file" do
+          subject.stub(:create_static)
+          subject.should_receive(:create_static).and_return(nil)
+          options.stub(:command).and_return(:static)
+          subject.run args
+        end
+      end
     end
   end
 

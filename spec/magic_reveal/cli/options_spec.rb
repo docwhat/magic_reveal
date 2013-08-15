@@ -19,10 +19,16 @@ describe MagicReveal::Cli::Options do
       its(:project) { should be_nil }
     end
 
-    context "geven 'start'" do
+    context "given 'start'" do
       let(:args) { %w[start] }
 
       its(:command) { should be(:start) }
+    end
+
+    context "given 'static'" do
+      let(:args) { %w[static] }
+
+      its(:command) { should be(:static) }
     end
 
     context "given 'help'" do
