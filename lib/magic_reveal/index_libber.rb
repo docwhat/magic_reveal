@@ -28,6 +28,8 @@ module MagicReveal
       if container = html.at_css('div.reveal div.slides')
         container.children = slides
       end
+      headers = slides.css('h1', 'h2', 'h3', 'h4', 'h5', 'h6')
+      html.title = headers.first.text unless headers.nil? || headers.empty?
     end
 
     def to_s

@@ -26,11 +26,16 @@ describe MagicReveal::IndexLibber do
 
   describe ".update_slides" do
     let(:slides) { '<section><h2>life with Joe</h2><p>&hellip;is good</section>' * 2 }
-    let(:html_text) { '<!DOCTYPE html><div class="reveal"><div class="slides"><section>text</section></div></div>' }
+    let(:html_text) { '<!DOCTYPE html><title>bogus</title><div class="reveal"><div class="slides"><section>text</section></div></div>' }
 
-    it "does stuff" do
+    it "inserts the slides" do
       subject.update_slides slides
       expect(subject.to_s).to include('life with Joe')
+    end
+
+    it "sets the title from the first Hx item" do
+      subject.update_slides slides
+      expect(subject.html.at_css('title').text).to eq('life with Joe')
     end
   end
 

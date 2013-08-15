@@ -23,13 +23,7 @@ module MagicReveal
 
     helpers do
       def markdown
-        @markdown ||= Redcarpet::Markdown.new(
-          MagicReveal::SlideRenderer.new,
-          :space_after_headers => true,
-          :filter_html => true,
-          :fenced_code_blocks => true,
-          :no_intra_emphasis => true,
-        )
+        @markdown ||=  SlideRenderer.markdown_renderer
       end
 
       def index_html_path
