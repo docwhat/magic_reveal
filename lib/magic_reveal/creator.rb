@@ -44,7 +44,7 @@ module MagicReveal
 
       reveal_dir.children.each do |subdir|
         next unless subdir.directory?
-        (top_dir + subdir.basename).make_symlink(subdir)
+        (top_dir + subdir.basename).make_symlink(subdir.relative_path_from(top_dir))
       end
 
       Dir.chdir(top_dir.to_s) do
