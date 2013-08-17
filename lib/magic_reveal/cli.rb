@@ -4,6 +4,7 @@ require 'magic_reveal/cli/options'
 require 'magic_reveal/creator'
 require 'magic_reveal/slide_renderer'
 require 'magic_reveal/index_libber'
+require 'magic_reveal/project_config'
 
 module MagicReveal
   class Cli
@@ -49,17 +50,20 @@ module MagicReveal
 
     def create_static
       slides = Pathname.pwd + 'slides.md'
-      reveal_js_html = Pathname.pwd + 'reveal.js' + 'index.html'
-      index_html = Pathname.pwd + 'index.html'
-
       markdown =  SlideRenderer.markdown_renderer
-      slides = markdown.render slides.read
-      libber = IndexLibber.new reveal_js_html.read
-      libber.update_author       Identifier.name
-      libber.update_description  "A Magical Presentiation"
-      libber.update_slides       slides
+      libber = IndexLibber.new
+      config = ProjectConfig.new(Pathname.pwd + 'config.json')
 
-      index_html.open('w') { |f| f.print libber.to_s }
+      libber.author = Identifier.name
+      libber.slides = markdown.render slides.read
+
+      libber.add_github_forkme config.json['github'] if config.json.key? 'github'
+
+      index_html = Pathname.pwd + 'index.html'
+      index_html.open('w') { |f| f.print libber }
+
+      js_file = Pathname.pwd + 'index.js'
+      js_file.open('w') { |f| f.print config.to_js }
     end
 
     def avenge_programmer

@@ -1,5 +1,6 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'pathname'
+require 'faker'
 
 EXAMPLE_DATA = Pathname.new(__FILE__).dirname + 'data'
 

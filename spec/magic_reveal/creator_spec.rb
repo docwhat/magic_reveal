@@ -30,8 +30,8 @@ describe MagicReveal::Creator do
       it "fetches and saves reveal.js" do
         subject.create_project(project)
         expect(fetcher).
-          to have_received(:save_to).
-          with(@tmpdir + project + 'reveal.js')
+          to have_received(:save_important_parts_to).
+          with(@tmpdir + project)
       end
 
       it "copies the template_slides" do

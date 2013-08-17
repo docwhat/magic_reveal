@@ -3,6 +3,7 @@ require 'pathname'
 
 require 'magic_reveal/version'
 require 'magic_reveal/reveal_js_fetcher'
+require 'magic_reveal/project_config'
 
 module MagicReveal
   class Creator
@@ -27,24 +28,19 @@ module MagicReveal
 
     def create_project(project)
       top_dir = directory + project
-      reveal_dir = top_dir + 'reveal.js'
       gemfile = top_dir + 'Gemfile'
 
       top_dir.mkdir
 
-      reveal_js_fetcher.save_to(reveal_dir)
+      reveal_js_fetcher.save_important_parts_to(top_dir)
 
       FileUtils.copy_file template_slides.to_s, (top_dir + 'slides.md').to_s
       FileUtils.copy_file template_config_ru.to_s, (top_dir + 'config.ru').to_s
+      FileUtils.copy_file ProjectConfig::DEFAULT_TEMPLATE.to_s, (top_dir + 'config.json').to_s
       gemfile.open('w') do |f|
         f.puts "source 'https://rubygems.org'"
         f.puts
         f.puts "gem 'magic_reveal', '~> #{VERSION}'"
-      end
-
-      reveal_dir.children.each do |subdir|
-        next unless subdir.directory?
-        (top_dir + subdir.basename).make_symlink(subdir.relative_path_from(top_dir))
       end
 
       Dir.chdir(top_dir.to_s) do

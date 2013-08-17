@@ -47,7 +47,7 @@ module MagicReveal
       if code =~ %r{\A\s*@@source\s*=\s*(.*)\s*\Z}
         File.read($1)
       else
-        code
+        code.sub(%r{\A\s*}, '').sub(%r{\s*\Z}, '')
       end
     end
 

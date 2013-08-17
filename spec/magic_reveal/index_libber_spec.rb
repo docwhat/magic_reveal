@@ -3,46 +3,95 @@ require 'magic_reveal/index_libber'
 
 describe MagicReveal::IndexLibber do
   subject { described_class.new html_text }
+  let(:html_text) { nil }
 
-  describe ".update_author" do
-    let(:html_text) { '<meta name="author" content="Hakim El Hattab">' }
+  describe ".set_meta" do
+    shared_examples "it is passed a name and content" do
+      let(:name) { "name#{rand 99}" }
+      let(:content) { "any old content ###{rand 99}" }
 
-    it "replaces the author" do
-      author = "Joe Cool #{rand 99}"
-      subject.update_author author
-      expect(subject.to_s).to match %r{content=.#{Regexp.quote author}.}
+      it "creates the node" do
+        subject.set_meta name, content
+
+        node = subject.html.at_css("meta[@name=#{name}]")
+        expect(node).to_not be_nil
+
+        content_attr = node[:content]
+        expect(content_attr).to eq(content)
+      end
+    end
+
+    context "with a html > meta node" do
+      let(:html_text) { "<!DOCTYPE html><meta name=\"#{name}\" content=\"#{content}\"><p>text" }
+
+      it_behaves_like "it is passed a name and content"
+    end
+
+    context "with a html > head > meta node" do
+      let(:html_text) { "<!DOCTYPE html><head><meta name=\"#{name}\" content=\"#{content}\"></head><p>text" }
+
+      it_behaves_like "it is passed a name and content"
+    end
+
+    context "without a meta node" do
+      let(:html_text) { '<!DOCTYPE html><p>text' }
+
+      it_behaves_like "it is passed a name and content"
     end
   end
 
-  describe ".update_description" do
-    let(:html_text) { '<meta name="description" content="A framework for easily creating beautiful presentations using HTML">' }
-
-    it "replaces the description" do
-      description = "#{rand 99} luft balloons"
-      subject.update_description description
-      expect(subject.html.at('meta').get_attribute('content')).to eq(description)
+  describe ".author=" do
+    it "calls set_meta" do
+      author = Faker::Name.name
+      subject.should_receive(:set_meta).with('author', author)
+      subject.author = author
     end
   end
 
-  describe ".update_slides" do
-    let(:slides) { '<section><h2>life with Joe</h2><p>&hellip;is good</section>' * 2 }
-    let(:html_text) { '<!DOCTYPE html><title>bogus</title><div class="reveal"><div class="slides"><section>text</section></div></div>' }
+  describe ".description=" do
+    it "calls set_meta" do
+      description = Faker::Lorem.paragraph
+      subject.should_receive(:set_meta).with('description', description)
+      subject.description = description
+    end
+  end
+
+  describe ".slides=" do
+    let(:title)     { Faker::Lorem.sentence  }
+    let(:paragraph) { Faker::Lorem.paragraph }
+    let(:slides)    { "<section><h2>#{title}</h2><p>#{paragraph}</section>" * 2 }
 
     it "inserts the slides" do
-      subject.update_slides slides
-      expect(subject.to_s).to include('life with Joe')
+      subject.slides = slides
+      expect(subject.html.at_css('h2').text).to eq(title)
+      expect(subject.html.at_css('p').text).to eq(paragraph)
     end
 
     it "sets the title from the first Hx item" do
-      subject.update_slides slides
-      expect(subject.html.at_css('title').text).to eq('life with Joe')
+      subject.slides = slides
+      expect(subject.html.at_css('title').text).to eq(title)
     end
   end
 
-  context "with random html" do
-    let(:html_text) { "<!DOCTYPE html>\n<body>\n<p>text here\n</body>" }
+  describe ".theme=" do
+    let(:theme) { Faker::Name.first_name }
 
-    its(:to_s) { should match %r{<body>\s*<p>text here\s*</p>\s*</body>} }
-    its(:to_s) { should be_kind_of(String) }
+    it "sets the theme node" do
+      subject.theme = theme
+      expect(subject.html.at_css('#theme')[:href]).to match(%r{/#{theme}\.css\Z})
+    end
+
+    context "with an empty doc" do
+      let(:html_text) { "<!DOCTYPE html>text" }
+
+      it "handles creating a new link#theme node" do
+        subject.theme = theme
+        link = subject.html.at_css('link')
+        expect(link).to_not be_nil
+        expect(link[:id]).to eq('theme')
+        expect(link[:rel]).to eq('stylesheet')
+        expect(link[:href]).to match(%r{/#{theme}\.css\Z})
+      end
+    end
   end
 end

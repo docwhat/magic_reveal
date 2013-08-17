@@ -99,6 +99,10 @@ describe MagicReveal::SlideRenderer do
       expect(subject.block_code('whatever', nil)).
         to match(%r{</code></pre>})
     end
+
+    it "doesn't add whitespace after code and before </code>" do
+      expect(subject.block_code('mouse', nil)).to match(%r{mouse</code>})
+    end
   end
 
   describe "prepare_code" do
@@ -118,6 +122,16 @@ describe MagicReveal::SlideRenderer do
       it "returns the text" do
         text = "#{rand 99} luft balloons."
         expect(subject.prepare_code text).to eq(text)
+      end
+
+      it "strips leading whitespace" do
+        expect(subject.prepare_code " \t\nmouse").
+          to eq('mouse')
+      end
+
+      it "strips trailing whitespace" do
+        expect(subject.prepare_code "mouse\n\t ").
+          to eq('mouse')
       end
     end
   end

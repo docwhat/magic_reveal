@@ -30,6 +30,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
   spec.add_development_dependency "guard-rspec", "~> 3.0"
   spec.add_development_dependency "rspec",       "~> 2.14"
+  spec.add_development_dependency "faker"
   spec.add_development_dependency "coveralls",   "~> 0.6"
   spec.add_development_dependency "better_errors"
   spec.add_development_dependency "binding_of_caller"

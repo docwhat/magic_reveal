@@ -2,6 +2,7 @@ require 'redcarpet'
 require 'sinatra/base'
 require 'magic_reveal/slide_renderer'
 require 'magic_reveal/index_libber'
+require 'magic_reveal/project_config'
 
 begin
   require 'better_errors'
@@ -21,23 +22,24 @@ module MagicReveal
 
     set :public_folder, Dir.getwd
 
-    helpers do
-      def markdown
-        @markdown ||=  SlideRenderer.markdown_renderer
-      end
+    get '/' do
+      slides = Pathname.pwd + 'slides.md'
+      markdown =  SlideRenderer.markdown_renderer
+      libber = IndexLibber.new
 
-      def index_html_path
-        @index_html_path ||= Pathname.pwd + 'reveal.js' + 'index.html'
-      end
+      libber.author = Identifier.name
+      libber.slides = markdown.render slides.read
+
+      config = ProjectConfig.new(Pathname.pwd + 'config.json')
+      libber.add_github_forkme config.json['github'] if config.json.key? 'github'
+
+      libber.to_s
     end
 
-    get '/' do
-      slides = markdown.render File.read('slides.md')
-      libber = MagicReveal::IndexLibber.new index_html_path.read
-      libber.update_author       MagicReveal::Identifier.name
-      libber.update_description  "A Magical Presentiation"
-      libber.update_slides       slides
-      libber.to_s
+    get '/index.js' do
+      content_type :js
+      config = ProjectConfig.new(Pathname.pwd + 'config.json')
+      config.to_s
     end
 
   end
