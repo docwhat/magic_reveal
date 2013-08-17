@@ -5,7 +5,7 @@ GEM
       io-like (>= 0.3.0)
     ffi (1.9.0)
     io-like (0.3.0)
-    magic_reveal (2.4.0.2)
+    magic_reveal (2.4.0.4)
       archive-zip (~> 0.6)
       nokogiri (~> 1.5)
       redcarpet (~> 3.0)
@@ -30,4 +30,4 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  magic_reveal (~> 2.4.0.2)
+  magic_reveal (~> 2.4.0.4)

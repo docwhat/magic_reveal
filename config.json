@@ -1,0 +1,15 @@
+{
+  "controls": true,
+  "progress": true,
+  "history": true,
+  "overview": true,
+  "center": true,
+  "theme": "sky",
+  "transition": "default",
+  "github": "docwhat/magic_reveal",
+  "plugins": [
+    "highlight",
+    "notes",
+    "zoom"
+    ]
+}
