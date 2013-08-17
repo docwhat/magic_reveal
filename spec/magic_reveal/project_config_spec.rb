@@ -9,7 +9,7 @@ describe MagicReveal::ProjectConfig do
 
   describe "#new" do
     it "calls io_or_path.read" do
-      io.should_receive(:read).with()
+      io.should_receive(:read).with().and_return("{}")
       subject
     end
 
