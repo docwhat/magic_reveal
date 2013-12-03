@@ -39,7 +39,7 @@ module MagicReveal
     get '/index.js' do
       content_type :js
       config = ProjectConfig.new(Pathname.pwd + 'config.json')
-      config.to_s
+      config.to_js
     end
 
   end
