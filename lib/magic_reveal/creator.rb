@@ -26,6 +26,12 @@ module MagicReveal
       @template_config_ru ||= Pathname.new(__FILE__).dirname + 'template-config.ru'
     end
 
+    def update_project(directory)
+      top_dir = Pathname.new(directory)
+
+      reveal_js_fetcher.save_important_parts_to(top_dir)
+    end
+
     def create_project(project)
       top_dir = directory + project
       gemfile = top_dir + 'Gemfile'

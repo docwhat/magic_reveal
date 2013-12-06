@@ -19,6 +19,12 @@ describe MagicReveal::Cli::Options do
       its(:project) { should be_nil }
     end
 
+    context "given 'force-reload'" do
+      let(:args) { %w[force-reload] }
+
+      its(:command) { should be(:force_reload) }
+    end
+
     context "given 'start'" do
       let(:args) { %w[start] }
 

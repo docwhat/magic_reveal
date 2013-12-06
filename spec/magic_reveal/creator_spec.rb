@@ -49,6 +49,17 @@ describe MagicReveal::Creator do
       end
     end
 
+    describe "update_project" do
+      let(:project) { @tmpdir + "project#{rand 99}" }
+
+      it "fetches and saves reveal.js" do
+        subject.update_project(project)
+        expect(fetcher).
+          to have_received(:save_important_parts_to).
+          with(project)
+      end
+    end
+
     describe ".template_slides" do
       its(:template_slides) { should be_kind_of(Pathname) }
       its(:template_slides) { should be_file }

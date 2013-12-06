@@ -1,4 +1,5 @@
 require 'forwardable'
+require 'highline/import'
 
 require 'magic_reveal/cli/options'
 require 'magic_reveal/creator'
@@ -25,14 +26,17 @@ module MagicReveal
     def show_help
       puts "Usage: #{program_name} <command>"
       puts
-      puts "  new <name>"
-      puts "    Creates new presentation in directory <name>"
+      puts '  new <name>'
+      puts '    Creates new presentation in directory <name>'
       puts
-      puts "  start [options]"
-      puts "    Starts serving the presentation in the current directory"
+      puts '  force-reload'
+      puts '    Refreshes the reveal.js files. WARNING: This may override customizations!'
       puts
-      puts "  static"
-      puts "    Creates a static index.html file from your slides"
+      puts '  start [options]'
+      puts '    Starts serving the presentation in the current directory'
+      puts
+      puts '  static'
+      puts '    Creates a static index.html file from your slides'
       puts
       exit
     end
@@ -82,6 +86,9 @@ module MagicReveal
       case command
       when :new
         creator.create_project(project)
+      when :force_reload
+        theyre_sure = (ask('This may overwrite customizations. Are you sure? (y/N) ') { |q| q.limit = 1; q.case = :downcase }) == 'y'
+        creator.update_project(Dir.getwd) if theyre_sure
       when :start
         start_server
       when :static

@@ -19,6 +19,8 @@ module MagicReveal
             @command = :new
             @project = args[1]
           end
+        when 'force-reload'
+          @command = :force_reload
         when 'start'
           @command = :start
         when 'static'
