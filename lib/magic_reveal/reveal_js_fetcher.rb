@@ -36,8 +36,8 @@ module MagicReveal
       Dir.mktmpdir do |tmpdir|
         tmp_reveal_dir = Pathname(tmpdir) + 'reveal.js'
         save_to(tmp_reveal_dir.to_s)
-        tmp_reveal_dir.children.select(&:directory?).each do |dir|
-          FileUtils.cp_r(dir.to_s, (reveal_dir + dir.basename).to_s)
+        tmp_reveal_dir.children.select(&:directory?).reject{|c| %w[test].include? c.basename.to_s}.each do |dir|
+          FileUtils.cp_r(dir.to_s, reveal_dir.to_s)
         end
       end
     end
