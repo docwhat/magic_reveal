@@ -2,6 +2,7 @@ $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'pathname'
 require 'faker'
 
+I18n.enforce_available_locales = true if I18n.respond_to? :enforce_available_locales
 EXAMPLE_DATA = Pathname.new(__FILE__).dirname + 'data'
 
 if ENV['TRAVIS'] == 'true'
