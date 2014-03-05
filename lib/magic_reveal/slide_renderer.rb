@@ -4,6 +4,7 @@ require 'cgi'
 require 'magic_reveal/version'
 
 module MagicReveal
+  # Custom renderer so the HTML is the right format for Reveal.js.
   class SlideRenderer < Redcarpet::Render::HTML
     include Redcarpet::Render::SmartyPants
     attr_accessor :has_shown_slides
@@ -14,11 +15,11 @@ module MagicReveal
 
     def self.markdown_renderer
       Redcarpet::Markdown.new(
-        self.new,
-        :space_after_headers => true,
-        :filter_html => true,
-        :fenced_code_blocks => true,
-        :no_intra_emphasis => true,
+        new,
+        space_after_headers: true,
+        filter_html: true,
+        fenced_code_blocks: true,
+        no_intra_emphasis: true
       )
     end
 
@@ -32,38 +33,32 @@ module MagicReveal
     end
 
     def header(text, header_level)
-      output = []
-      if has_shown_slides
-        output << "</section>"
-      else
+      [].tap do |output|
+        output << '</section>' if has_shown_slides
         @has_shown_slides = true
-      end
-      output << "<section>"
-      output << "<h#{header_level}>#{text}</h#{header_level}>"
-      output.join("\n")
+
+        output << '<section>'
+        output << "<h#{header_level}>#{text}</h#{header_level}>"
+      end.join("\n")
     end
 
     def prepare_code(code)
-      if code =~ %r{\A\s*@@source\s*=\s*(.*)\s*\Z}
-        File.read($1)
+      if code =~ /\A\s*@@source\s*=\s*(?<filename>.*)\s*\Z/
+        File.read Regexp.last_match[:filename]
       else
-        code.sub(%r{\A\s*}, '').sub(%r{\s*\Z}, '')
+        code.sub(/\A\s*/, '').sub(/\s*\Z/, '')
       end
     end
 
     def block_code(code, language)
-      output = []
-      if language
-        output << "<pre class=\"#{language}\">"
-      else
-        output << "<pre>"
-      end
-      output << "<code>"
+      [].tap do |output|
+        output << (language ? "<pre class=\"#{language}\">"  : '<pre>')
+        output << '<code>'
 
-      output << CGI::escapeHTML(prepare_code code)
-      output << "</code>"
-      output << "</pre>"
-      output.join("")
+        output << CGI.escapeHTML(prepare_code code)
+        output << '</code>'
+        output << '</pre>'
+      end.join('')
     end
   end
 end
