@@ -32,13 +32,14 @@ module MagicReveal
       has_shown_slides ? '</section>' : ''
     end
 
-    def header(text, header_level)
+    def header(text, header_level, anchor = nil)
       [].tap do |output|
         output << '</section>' if has_shown_slides
         @has_shown_slides = true
+        anchor_html = anchor ? " id=\"#{anchor}\"" : ''
 
         output << '<section>'
-        output << "<h#{header_level}>#{text}</h#{header_level}>"
+        output << "<h#{header_level}#{anchor_html}>#{text}</h#{header_level}>"
       end.join("\n")
     end
 
