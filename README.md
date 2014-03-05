@@ -22,7 +22,7 @@ the revision specific to Magic Reveal.
 
 ### Requirements
 
-* Ruby 1.9.2 or newer
+* Ruby 1.9.3 or newer
 * A recent version of [Bundler](http://bundler.io/)
 
 <br/>
