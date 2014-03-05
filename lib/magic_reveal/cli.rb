@@ -1,6 +1,5 @@
 require 'forwardable'
 require 'highline/import'
-require 'active_support/core_ext'
 
 require 'magic_reveal/cli/options'
 require 'magic_reveal/creator'
@@ -26,20 +25,21 @@ module MagicReveal
 
     # Action Classes
     def show_help # rubocop:disable MethodLength
-      puts <<-EOF.strip_heredoc
-      Usage: #{program_name} <command>
+      puts <<-EOF
+Usage: #{program_name} <command>
+  Magic reveal version: #{MagicReveal::VERSION}
 
-        new <name>
-          Creates new presentation in directory <name>
+  new <name>
+    Creates new presentation in directory <name>
 
-        force-reload
-          Refreshes the reveal.js files. WARNING: This may override customizations!
+  force-reload
+    Refreshes the reveal.js files. WARNING: This may override customizations!
 
-        start [options]
-          Starts serving the presentation in the current directory
+  start [options]
+    Starts serving the presentation in the current directory
 
-        static
-          Creates a static index.html file from your slides
+  static
+    Creates a static index.html file from your slides
       EOF
       exit
     end
