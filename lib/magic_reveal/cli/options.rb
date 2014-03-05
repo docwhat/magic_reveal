@@ -1,16 +1,17 @@
 module MagicReveal
   class Cli
+    # Command line options
     class Options
       attr_accessor(
         :command,
-        :project,
+        :project
       )
 
       def program_name
-        @program_name ||= File.basename($0)
+        @program_name ||= File.basename($PROGRAM_NAME)
       end
 
-      def parse args
+      def parse(args) # rubocop:disable MethodLength
         case args.first
         when 'new'
           if args.length != 2

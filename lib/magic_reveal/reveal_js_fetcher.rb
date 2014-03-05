@@ -3,11 +3,12 @@ require 'magic_reveal/version'
 require 'magic_reveal/conductor'
 
 module MagicReveal
+  # Fetches Reveal.js
   class RevealJsFetcher
     attr_reader :version
     attr_writer :conductor
 
-    def initialize(version=REVEAL_JS_VERSION)
+    def initialize(version = REVEAL_JS_VERSION)
       @version = version
     end
 
@@ -36,7 +37,7 @@ module MagicReveal
       Dir.mktmpdir do |tmpdir|
         tmp_reveal_dir = Pathname(tmpdir) + 'reveal.js'
         save_to(tmp_reveal_dir.to_s)
-        tmp_reveal_dir.children.select(&:directory?).reject{|c| %w[test].include? c.basename.to_s}.each do |dir|
+        tmp_reveal_dir.children.select(&:directory?).reject { |c| %w[test].include? c.basename.to_s }.each do |dir|
           FileUtils.cp_r(dir.to_s, reveal_dir.to_s)
         end
       end

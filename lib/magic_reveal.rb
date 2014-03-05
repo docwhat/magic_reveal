@@ -1,4 +1,4 @@
-require "magic_reveal/version"
+require 'magic_reveal/version'
 
 module MagicReveal
   class Error < StandardError; end

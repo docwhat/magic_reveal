@@ -9,16 +9,16 @@ module MagicReveal
   class Conductor
     attr_reader :url, :enable_warnings
 
-    def initialize url=nil
+    def initialize(url = nil)
       self.url = url unless url.nil?
     end
 
-    def url= url
+    def url=(url)
       @url = URI.parse url
     end
 
-    def fetch save_path, limit = 5
-      raise TooManyRedirects if limit <= 0
+    def fetch(save_path, limit = 5) # rubocop:disable MethodLength
+      fail TooManyRedirects if limit <= 0
       save_path = Pathname.new save_path
 
       request = Net::HTTP::Get.new url.path
@@ -32,13 +32,13 @@ module MagicReveal
         warn "redirected to #{url}" if enable_warnings
         fetch(save_path, limit - 1)
       else
-        raise Error, "Huh? #{response.value}"
+        fail Error, "Huh? #{response.value}"
       end
     end
 
-    def unpack zip_file, directory
+    def unpack(zip_file, directory)
       directory = Pathname.new directory
-      raise Error, "Directory '#{directory}' already exists." if directory.exist?
+      fail Error, "Directory '#{directory}' already exists." if directory.exist?
 
       Archive::Zip.extract zip_file.to_s, directory.to_s
 

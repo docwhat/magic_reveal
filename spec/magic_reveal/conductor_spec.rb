@@ -13,29 +13,29 @@ describe MagicReveal::Conductor do
 
   its(:url) { should be_kind_of(URI) }
 
-  describe ".fetch" do
-    it "should save a file" do
-      subject.url = "http://google.com/"
+  describe '.fetch' do
+    it 'should save a file' do
+      subject.url = 'http://google.com/'
       save_file = @tmpdir + 'index.html'
       subject.fetch save_file
       save_file.should exist
     end
   end
 
-  describe ".unpack" do
+  describe '.unpack' do
     let(:unpack_dir) { @tmpdir + "unpack-#{rand 200}" }
-    context "given a zipfile" do
+    context 'given a zipfile' do
       let(:zipfile) { EXAMPLE_DATA + 'wrapped.zip' }
 
-      it "unpacks and unwraps the zipfile" do
+      it 'unpacks and unwraps the zipfile' do
         subject.unpack zipfile, unpack_dir
         (unpack_dir + 'testfile.md').should exist
       end
 
-      context "and the unpack directory exists already" do
+      context 'and the unpack directory exists already' do
         before { unpack_dir.mkdir }
 
-        it "should raise an error" do
+        it 'should raise an error' do
           expect { subject.unpack zipfile, unpack_dir }.to raise_error(MagicReveal::Error)
         end
       end

@@ -6,6 +6,7 @@ require 'magic_reveal/reveal_js_fetcher'
 require 'magic_reveal/project_config'
 
 module MagicReveal
+  # Creates the world!
   class Creator
     attr_reader :directory
     attr_writer :reveal_js_fetcher, :template_slides, :template_config_ru
@@ -32,7 +33,7 @@ module MagicReveal
       reveal_js_fetcher.save_important_parts_to(top_dir)
     end
 
-    def create_project(project)
+    def create_project(project) # rubocop:disable MethodLength
       top_dir = directory + project
       gemfile = top_dir + 'Gemfile'
 

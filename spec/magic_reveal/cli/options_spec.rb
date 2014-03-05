@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'magic_reveal/cli/options'
 
 describe MagicReveal::Cli::Options do
-  describe ".parse" do
+  describe '.parse' do
     before { subject.parse args }
 
     context "given 'new <project>'" do
@@ -43,7 +43,7 @@ describe MagicReveal::Cli::Options do
       its(:command) { should be(:help) }
     end
 
-    context "given no arguments" do
+    context 'given no arguments' do
       let(:args) { [] }
 
       its(:command) { should be(:help) }

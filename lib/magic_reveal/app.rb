@@ -12,6 +12,7 @@ rescue LoadError
 end
 
 module MagicReveal
+  # The web application
   class App < Sinatra::Base
     if HAS_BETTER_ERRORS
       configure :development do
@@ -41,6 +42,5 @@ module MagicReveal
       config = ProjectConfig.new(Pathname.pwd + 'config.json')
       config.to_js
     end
-
   end
 end

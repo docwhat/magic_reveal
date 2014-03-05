@@ -1,10 +1,11 @@
 require 'sys/admin'
 
 module MagicReveal
+  # figures out the author's identity
   class Identifier
     attr_accessor :sys_admin
 
-    def initialize sys_admin=nil
+    def initialize(sys_admin = nil)
       @sys_admin = sys_admin || Sys::Admin
     end
 
