@@ -3,26 +3,28 @@ GEM
   specs:
     archive-zip (0.6.0)
       io-like (>= 0.3.0)
-    ffi (1.9.0)
+    ffi (1.9.3)
+    highline (1.6.21)
     io-like (0.3.0)
-    magic_reveal (2.4.0.4)
+    magic_reveal (2.6.1.4)
       archive-zip (~> 0.6)
+      highline (~> 1.6)
       nokogiri (~> 1.5)
       redcarpet (~> 3.0)
       sinatra (~> 1.4)
       sys-admin (~> 1.6)
-    mini_portile (0.5.1)
-    nokogiri (1.6.0)
+    mini_portile (0.5.2)
+    nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     rack (1.5.2)
-    rack-protection (1.5.0)
+    rack-protection (1.5.2)
       rack
-    redcarpet (3.0.0)
-    sinatra (1.4.3)
+    redcarpet (3.1.1)
+    sinatra (1.4.4)
       rack (~> 1.4)
       rack-protection (~> 1.4)
       tilt (~> 1.3, >= 1.3.4)
-    sys-admin (1.6.0)
+    sys-admin (1.6.2)
       ffi (>= 1.1.0)
     tilt (1.4.1)
 
@@ -30,4 +32,4 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  magic_reveal (~> 2.4.0.4)
+  magic_reveal (~> 2.6.1.3)

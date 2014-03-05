@@ -1,4 +1,4 @@
-/* Generated at 2013-08-17 13:24:17 -0400 */
+/* Generated at 2014-03-04 23:10:27 -0500 */
 var config = {
   controls: true,
   progress: true,
@@ -7,6 +7,7 @@ var config = {
   center: true,
   theme: "sky",
   transition: "default",
+  github: "docwhat/magic_reveal",
   plugins: ["highlight","notes","zoom"],
 "dependencies": [
 { src: "lib/js/classList.js", condition: function() { return !document.body.classList; } },

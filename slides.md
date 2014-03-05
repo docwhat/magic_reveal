@@ -4,9 +4,11 @@ Magic Reveal makes creating presentations easy and fun.
 
 See it in action at the [demo/tutorial](http://docwhat.github.io/magic_reveal/)
 
+[![Gem Version](https://badge.fury.io/rb/magic_reveal.png)](http://badge.fury.io/rb/magic_reveal)
 [![Build Status](https://secure.travis-ci.org/docwhat/magic_reveal.png?branch=master)](http://travis-ci.org/docwhat/magic_reveal)
 [![Dependencies](https://gemnasium.com/docwhat/magic_reveal.png?branch=master)](https://gemnasium.com/docwhat/magic_reveal)
 [![Coverage Status](https://coveralls.io/repos/docwhat/magic_reveal/badge.png?branch=master)](https://coveralls.io/r/docwhat/magic_reveal)
+[![Code Climate](https://codeclimate.com/github/docwhat/magic_reveal.png)](https://codeclimate.com/github/docwhat/magic_reveal)
 
 ## Installation
 
@@ -20,7 +22,7 @@ the revision specific to Magic Reveal.
 
 ### Requirements
 
-* Ruby 1.9.2 or newer
+* Ruby 1.9.3 or newer
 * A recent version of [Bundler](http://bundler.io/)
 
 <br/>
